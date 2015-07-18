@@ -3,4 +3,6 @@
 
     <string name="hello_world">Getting Started</string>
     <string name="action_settings">Settings</string>
+    <string name="edit_text">Edit Text</string>
+    <string name="button_send">Send!</string>
 </resources>

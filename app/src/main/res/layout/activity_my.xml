@@ -6,12 +6,12 @@
     android:layout_weight="3">
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/edit_text"
         android:id="@+id/edit_message"
         android:layout_weight="1"
-        android:width="0dp"/>
+        />
 
     <Button
         android:layout_width="wrap_content"

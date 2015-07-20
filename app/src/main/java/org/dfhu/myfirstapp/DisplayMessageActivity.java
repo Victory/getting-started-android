@@ -2,12 +2,12 @@ package org.dfhu.myfirstapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class DisplayMessageActivity extends AppCompatActivity {
-    
+public class DisplayMessageActivity extends ActionBarActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

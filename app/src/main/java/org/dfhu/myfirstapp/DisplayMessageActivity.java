@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DisplayMessageActivity extends AppCompatActivity {
 
@@ -26,6 +27,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         textView.setText(message);
 
         setContentView(textView);
+
     }
 
     @Override
@@ -34,6 +36,11 @@ public class DisplayMessageActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            Toast.makeText(
+                    DisplayMessageActivity.this, "clicked for home", Toast.LENGTH_SHORT).show();
+        }
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {

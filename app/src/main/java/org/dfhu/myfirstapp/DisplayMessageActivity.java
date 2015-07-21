@@ -2,17 +2,21 @@ package org.dfhu.myfirstapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class DisplayMessageActivity extends ActionBarActivity {
+public class DisplayMessageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         Intent intent = getIntent();
         String message = intent.getStringExtra(MyActivity.EXTRA_MESSAGE);

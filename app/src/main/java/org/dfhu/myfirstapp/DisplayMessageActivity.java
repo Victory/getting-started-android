@@ -8,7 +8,14 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class DisplayMessageActivity extends AppCompatActivity {
+
+    // the activity is created each time so we need to make these incrementors static
+    private static AtomicInteger numOnPause = new AtomicInteger(0);
+    private static AtomicInteger numOnStop = new AtomicInteger(0);
+    private static AtomicInteger numOnDestroy = new AtomicInteger(0);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +28,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String message = intent.getStringExtra(MyActivity.EXTRA_MESSAGE);
+
+        message = message.concat(" numPause: " + numOnPause.get());
+        message = message.concat(" numStop: " + numOnStop.get());
+        message = message.concat(" numDestory: " + numOnDestroy.get());
 
         TextView textView = new TextView(this);
         textView.setTextSize(40);
@@ -48,5 +59,24 @@ public class DisplayMessageActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    protected void onPause() {
+        numOnPause.incrementAndGet();
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        numOnDestroy.incrementAndGet();
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStop() {
+        numOnStop.incrementAndGet();
+        super.onStop();
     }
 }

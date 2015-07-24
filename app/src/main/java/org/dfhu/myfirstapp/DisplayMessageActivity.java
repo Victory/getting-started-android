@@ -13,13 +13,23 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class DisplayMessageActivity extends AppCompatActivity {
 
     // the activity is created each time so we need to make these incrementors static
-    private static AtomicInteger numOnPause = new AtomicInteger(0);
-    private static AtomicInteger numOnStop = new AtomicInteger(0);
-    private static AtomicInteger numOnDestroy = new AtomicInteger(0);
+    private static final AtomicInteger numOnPause = new AtomicInteger(0);
+    private static final AtomicInteger numOnStop = new AtomicInteger(0);
+    private static final AtomicInteger numOnDestroy = new AtomicInteger(0);
+
+    private enum BundleNames {
+        LAST_NUM_STOP
+    }
+    // used to test onCreate Bundle
+    private Integer lastNumStop = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            lastNumStop = savedInstanceState.getInt(BundleNames.LAST_NUM_STOP.name());
+        }
 
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
@@ -31,8 +41,11 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         message = message.concat(" numPause: " + numOnPause.get());
         message = message.concat(" numStop: " + numOnStop.get());
-        message = message.concat(" numDestory: " + numOnDestroy.get());
+        message = message.concat(" numDestroy: " + numOnDestroy.get());
 
+        if (lastNumStop != null) {
+            message = message.concat(" lastNumStop: " + lastNumStop);
+        }
         TextView textView = new TextView(this);
         textView.setTextSize(40);
         textView.setText(message);
@@ -78,5 +91,13 @@ public class DisplayMessageActivity extends AppCompatActivity {
     protected void onStop() {
         numOnStop.incrementAndGet();
         super.onStop();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+        outState.putInt(BundleNames.LAST_NUM_STOP.name(), numOnStop.get());
+
+        super.onSaveInstanceState(outState);
     }
 }

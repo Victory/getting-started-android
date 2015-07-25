@@ -10,9 +10,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.atomic.AtomicReference;
+
 public class MyActivity extends AppCompatActivity {
 
     public static final String EXTRA_MESSAGE = "org.dfhu.myfirstapp.MESSAGE";
+
+    private AtomicReference<String> whenStopped = new AtomicReference<>("");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +65,19 @@ public class MyActivity extends AppCompatActivity {
 
     @Override
     protected void onRestart () {
-
         TextView lifeCycle = (TextView) findViewById(R.id.lifeCycle);
-        lifeCycle.setText(R.string.called_restart);
+        String prefix = getResources().getString(R.string.called_restart);
+        lifeCycle.setText(prefix  + " " + whenStopped);
+
+
         super.onRestart();
+    }
+
+    @Override
+    protected void onStop() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm::ss");
+        String newValue = sdf.format(new Date());
+        whenStopped.set(newValue);
+        super.onStop();
     }
 }

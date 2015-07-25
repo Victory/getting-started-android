@@ -7,4 +7,6 @@
     <string name="button_send">Send!</string>
     <string name="title_activity_display_message">DisplayMessageActivity</string>
     <string name="action_search">Search</string>
+    <string name="no_lifecyle_info">No Life Cycle Info</string>
+    <string name="called_restart">Called restart</string>
 </resources>

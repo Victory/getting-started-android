@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class MyActivity extends AppCompatActivity {
 
@@ -45,6 +46,7 @@ public class MyActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     /** called when user clicks the send button  */
     public void sendMessage (View view) {
         Intent intent = new Intent(this, DisplayMessageActivity.class);
@@ -52,5 +54,14 @@ public class MyActivity extends AppCompatActivity {
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
+    }
+
+
+    @Override
+    protected void onRestart () {
+
+        TextView lifeCycle = (TextView) findViewById(R.id.lifeCycle);
+        lifeCycle.setText(R.string.called_restart);
+        super.onRestart();
     }
 }

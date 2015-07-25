@@ -2,21 +2,37 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_weight="3">
 
-    <EditText
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/edit_text"
-        android:id="@+id/edit_message"
-        android:layout_weight="1"
-        />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <Button
-        android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/edit_text"
+            android:id="@+id/edit_message"
+            android:layout_weight="1"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_send"
+            android:onClick="sendMessage"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_send"
-        android:onClick="sendMessage"/>
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/no_lifecyle_info"
+        android:id="@+id/lifeCycle"
+        android:layout_gravity="top|center_vertical"
+        android:layout_marginTop="10dp"
+        android:padding="3dp" />
 
 </LinearLayout>

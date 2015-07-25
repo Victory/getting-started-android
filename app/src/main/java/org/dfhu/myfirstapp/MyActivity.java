@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicReference;
@@ -67,7 +68,7 @@ public class MyActivity extends AppCompatActivity {
     protected void onRestart () {
         TextView lifeCycle = (TextView) findViewById(R.id.lifeCycle);
         String prefix = getResources().getString(R.string.called_restart);
-        lifeCycle.setText(prefix  + " " + whenStopped);
+        lifeCycle.setText(prefix + " " + whenStopped + " Now: " + nowString());
 
 
         super.onRestart();
@@ -75,9 +76,15 @@ public class MyActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm::ss");
-        String newValue = sdf.format(new Date());
-        whenStopped.set(newValue);
+
+        whenStopped.set(nowString());
         super.onStop();
     }
+
+    /** return pretty printed now string */
+    private String nowString () {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm::ss");
+        return sdf.format(new Date());
+    }
+
 }

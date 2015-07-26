@@ -1,6 +1,7 @@
 package org.dfhu.myfirstapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -15,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class MyActivity extends AppCompatActivity {
+public class MyActivity extends AppCompatActivity implements InfoFragment.OnFragmentInteractionListener {
 
     public static final String EXTRA_MESSAGE = "org.dfhu.myfirstapp.MESSAGE";
 
@@ -87,4 +88,8 @@ public class MyActivity extends AppCompatActivity {
         return sdf.format(new Date());
     }
 
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+    }
 }

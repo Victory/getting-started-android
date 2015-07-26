@@ -17,9 +17,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
     private static final AtomicInteger numOnStop = new AtomicInteger(0);
     private static final AtomicInteger numOnDestroy = new AtomicInteger(0);
 
-    private enum BundleNames {
+    private enum StateKeys {
         LAST_NUM_STOP
     }
+
     // used to test onCreate Bundle
     private Integer lastNumStop = 0;
 
@@ -28,7 +29,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState != null) {
-            lastNumStop = savedInstanceState.getInt(BundleNames.LAST_NUM_STOP.name());
+            lastNumStop = savedInstanceState.getInt(StateKeys.LAST_NUM_STOP.name());
         }
 
         ActionBar ab = getSupportActionBar();
@@ -96,7 +97,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
 
-        outState.putInt(BundleNames.LAST_NUM_STOP.name(), numOnStop.get());
+        outState.putInt(StateKeys.LAST_NUM_STOP.name(), numOnStop.get());
 
         super.onSaveInstanceState(outState);
     }

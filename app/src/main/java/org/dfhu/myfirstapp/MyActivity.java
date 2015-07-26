@@ -3,6 +3,7 @@ package org.dfhu.myfirstapp;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,7 +27,30 @@ public class MyActivity extends AppCompatActivity implements InfoFragment.OnFrag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
+
+        // if we have a savedInstanceState we probably already have the fragment, return so
+        // we don't have double fragments
+        if (savedInstanceState == null) {
+            setupInfoFragment();
+        }
     }
+
+    private void setupInfoFragment() {
+        View fragmentContainer = findViewById(R.id.fragmentContainer);
+
+        // if this view doesn't have a fragmentContainer return
+        if (fragmentContainer == null) {
+            return;
+        }
+
+        InfoFragment infoFragment = InfoFragment.newInstance("foo", "bar");
+        // pass along any special extras from the intent
+        infoFragment.setArguments(getIntent().getExtras());
+
+        getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainer, infoFragment).commit();
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

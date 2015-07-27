@@ -3,13 +3,13 @@ package org.dfhu.myfirstapp;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 
@@ -86,6 +86,17 @@ public class MyActivity extends AppCompatActivity implements InfoFragment.OnFrag
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
+    }
+
+
+    public void swapOutFragment (View view) {
+        FrameLayout fragmentContainer = (FrameLayout) findViewById(R.id.fragmentContainer);
+
+        SwapedFragment fragment = SwapedFragment.newInstance();
+        fragment.setArguments(getIntent().getExtras());
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+
     }
 
 

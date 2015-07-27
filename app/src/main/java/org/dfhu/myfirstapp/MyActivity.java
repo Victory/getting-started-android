@@ -90,13 +90,10 @@ public class MyActivity extends AppCompatActivity implements InfoFragment.OnFrag
 
 
     public void swapOutFragment (View view) {
-        FrameLayout fragmentContainer = (FrameLayout) findViewById(R.id.fragmentContainer);
-
         SwapedFragment fragment = SwapedFragment.newInstance();
         fragment.setArguments(getIntent().getExtras());
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
-
     }
 
 

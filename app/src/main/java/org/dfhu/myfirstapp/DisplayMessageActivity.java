@@ -1,9 +1,12 @@
 package org.dfhu.myfirstapp;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +19,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
     private static final AtomicInteger numOnPause = new AtomicInteger(0);
     private static final AtomicInteger numOnStop = new AtomicInteger(0);
     private static final AtomicInteger numOnDestroy = new AtomicInteger(0);
+
+    private static DbOpenHelper dbOpenHelper;
 
     private enum StateKeys {
         LAST_NUM_STOP
@@ -75,6 +80,16 @@ public class DisplayMessageActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    @Override
+    protected void onStart ()
+    {
+        dbOpenHelper = new DbOpenHelper(DisplayMessageActivity.this);
+        SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
+        dbOpenHelper.insert("test", "number 1");
+
+        super.onStart();
+    }
 
     @Override
     protected void onPause() {

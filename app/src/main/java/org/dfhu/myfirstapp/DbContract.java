@@ -9,11 +9,11 @@ public final class DbContract {
 
     public DbContract() {} // you shouldn't create an instance
 
-    public static abstract class LifeCycleEventsHistory implements BaseColumns {
-        private static final String TABLE_NAME = "life_cycle_events";
-        private static final String COLUMN_NAME_KEY = "key";
-        private static final String COLUMN_NAME_VALUE = "value";
-        private static final String COLUMN_NAME_DATE = "date_added";
+    public abstract static class LifeCycleEventsHistory implements BaseColumns {
+        public static final String TABLE_NAME = "life_cycle_events";
+        public static final String COLUMN_NAME_KEY = "key";
+        public static final String COLUMN_NAME_VALUE = "value";
+        public static final String COLUMN_NAME_DATE = "date_added";
     }
 
     public static String getLifeCycleEventsHistoryCreateString () {

@@ -20,8 +20,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
     private static final AtomicInteger numOnStop = new AtomicInteger(0);
     private static final AtomicInteger numOnDestroy = new AtomicInteger(0);
 
-    private static DbOpenHelper dbOpenHelper;
-
     private enum StateKeys {
         LAST_NUM_STOP
     }
@@ -84,10 +82,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
     @Override
     protected void onStart ()
     {
-        dbOpenHelper = new DbOpenHelper(DisplayMessageActivity.this);
-        SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
-        dbOpenHelper.insert("test", "number 1");
-
         super.onStart();
     }
 

@@ -19,6 +19,8 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class MyActivity extends AppCompatActivity implements InfoFragment.OnFragmentInteractionListener {
 
+    LifeCycleEventsSource lifeCycleEventsSource;
+
     public static final String EXTRA_MESSAGE = "org.dfhu.myfirstapp.MESSAGE";
 
     private AtomicReference<String> whenStopped = new AtomicReference<>("");
@@ -88,6 +90,12 @@ public class MyActivity extends AppCompatActivity implements InfoFragment.OnFrag
         startActivity(intent);
     }
 
+    /** called when user clicks insertLifeCycleEvent */
+    public synchronized void insertLifeCycleEvent (View view) {
+        lifeCycleEventsSource = new LifeCycleEventsSource(this);
+        lifeCycleEventsSource.insertValue("magic", "value");
+
+    }
 
     public void swapOutFragment (View view) {
         if (findViewById(R.id.swapedFragment) == null) {

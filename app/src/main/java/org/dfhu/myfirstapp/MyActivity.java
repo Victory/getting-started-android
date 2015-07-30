@@ -8,18 +8,24 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class MyActivity extends AppCompatActivity implements InfoFragment.OnFragmentInteractionListener {
 
-    LifeCycleEventsSource lifeCycleEventsSource;
+    private LifeCycleEventsSource lifeCycleEventsSource;
+    private ListView listView;
 
     public static final String EXTRA_MESSAGE = "org.dfhu.myfirstapp.MESSAGE";
 
@@ -35,6 +41,31 @@ public class MyActivity extends AppCompatActivity implements InfoFragment.OnFrag
         if (savedInstanceState == null) {
             setupInfoFragment();
         }
+
+
+        lifeCycleEventsSource = new LifeCycleEventsSource(this);
+        try {
+            lifeCycleEventsSource.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        List<LifeCycleEvent> all = lifeCycleEventsSource.getAll();
+        ArrayAdapter<LifeCycleEvent> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1, all);
+
+        getListView().setAdapter(adapter);
+
+
+    }
+
+
+    private ListView getListView () {
+        if (listView == null) {
+            listView = (ListView) findViewById(R.id.eventsList);
+        }
+        return listView;
     }
 
     private void setupInfoFragment() {
@@ -91,10 +122,10 @@ public class MyActivity extends AppCompatActivity implements InfoFragment.OnFrag
     }
 
     /** called when user clicks insertLifeCycleEvent */
-    public synchronized void insertLifeCycleEvent (View view) {
+    public synchronized void insertLifeCycleEvent (View view) throws SQLException {
         lifeCycleEventsSource = new LifeCycleEventsSource(this);
-        lifeCycleEventsSource.insertValue("magic", "value");
-
+        lifeCycleEventsSource.insertValue("magic", "information");
+        // TODO: update listView
     }
 
     public void swapOutFragment (View view) {

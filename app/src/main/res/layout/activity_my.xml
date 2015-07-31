@@ -53,6 +53,12 @@
         >
     </ListView>
 
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/clear_list"
+        android:onClick="clearList" />
+
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

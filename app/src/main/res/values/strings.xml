@@ -15,4 +15,5 @@
     <string name="swap_fragment">Swap Fragment</string>
     <string name="hello_swaped_fragment">Hello Swaped Fragment</string>
     <string name="insert_value">insert value</string>
+    <string name="clear_list">clear list</string>
 </resources>

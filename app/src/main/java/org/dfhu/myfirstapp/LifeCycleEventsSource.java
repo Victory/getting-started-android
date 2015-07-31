@@ -77,4 +77,9 @@ public class LifeCycleEventsSource {
         return all;
     }
 
+    public void empty() throws SQLException {
+        open();
+        db.delete(LifeCycleEventsHelper.TABLE_NAME, null, null);
+    }
+
 }

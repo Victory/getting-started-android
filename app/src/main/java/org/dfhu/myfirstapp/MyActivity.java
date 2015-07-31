@@ -24,6 +24,8 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class MyActivity extends AppCompatActivity implements InfoFragment.OnFragmentInteractionListener {
 
+    private List<LifeCycleEvent> allEvents;
+
     private LifeCycleEventsSource lifeCycleEventsSource;
     private ListView listView;
 
@@ -50,10 +52,10 @@ public class MyActivity extends AppCompatActivity implements InfoFragment.OnFrag
             e.printStackTrace();
         }
 
-        List<LifeCycleEvent> all = lifeCycleEventsSource.getAll();
+        allEvents = lifeCycleEventsSource.getAll();
         ArrayAdapter<LifeCycleEvent> adapter = new ArrayAdapter<>(
                 this,
-                android.R.layout.simple_list_item_1, all);
+                android.R.layout.simple_list_item_1, allEvents);
 
         getListView().setAdapter(adapter);
 
@@ -125,8 +127,19 @@ public class MyActivity extends AppCompatActivity implements InfoFragment.OnFrag
     public synchronized void insertLifeCycleEvent (View view) throws SQLException {
         lifeCycleEventsSource = new LifeCycleEventsSource(this);
         lifeCycleEventsSource.insertValue("magic", "information");
-        // TODO: update listView
+        allEvents = lifeCycleEventsSource.getAll();
+        BaseAdapter base = (BaseAdapter) getListView().getAdapter();
+        base.notifyDataSetChanged();
     }
+
+
+    public void clearList (View view) throws SQLException {
+        lifeCycleEventsSource = new LifeCycleEventsSource(this);
+        lifeCycleEventsSource.empty();
+        BaseAdapter base = (BaseAdapter) getListView().getAdapter();
+        base.notifyDataSetChanged();
+    }
+
 
     public void swapOutFragment (View view) {
         if (findViewById(R.id.swapedFragment) == null) {
@@ -139,6 +152,7 @@ public class MyActivity extends AppCompatActivity implements InfoFragment.OnFrag
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
         }
     }
+
 
 
     @Override

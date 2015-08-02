@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp" >
+
+
+    <EditText
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/edit_text"
+        android:id="@+id/edit_message"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_send"
+        android:onClick="sendMessage"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/edit_message"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_insert"
+        android:text="@string/insert_value"
+        android:onClick="insertLifeCycleEvent"
+        android:layout_below="@+id/edit_message"
+        android:layout_alignParentRight="true" />
+
+
+
+
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/clear_list"
+        android:onClick="clearList"
+        android:id="@+id/button_clear_list"
+        android:layout_above="@id/lifeCycle"
+        />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/no_lifecyle_info"
+        android:id="@+id/lifeCycle"
+        android:layout_gravity="top|center_vertical"
+        android:layout_marginTop="10dp"
+        android:padding="3dp"
+        android:layout_above="@id/fragmentContainer"
+        />
+
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        />
+
+
+    <!-- has to be at bottom (both referenced elements need present for relative layout) -->
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/eventsList"
+        android:layout_below="@id/button_insert"
+        android:layout_above="@+id/button_clear_list"
+        >
+    </ListView>
+
+</RelativeLayout>

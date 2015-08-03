@@ -14,16 +14,22 @@ public class LifeCycleEventsHelper extends SQLiteOpenHelper {
     public static final String COLUMN_NAME_KEY = "key";
     public static final String COLUMN_NAME_VALUE = "value";
     public static final String COLUMN_NAME_DATE_ADDED = "date_added";
+    public static final String _ID = "_ID";
 
+    public static final int COLUMN_INDEX_KEY = 0;
+    public static final int COLUMN_INDEX_VALUE = 1;
+    public static final int COLUMN_INDEX_DATE_ADDED = 2;
+    public static final int COLUMN_INDEX_ID = 3;
 
     public static final String[] allColumns = {
             LifeCycleEventsHelper.COLUMN_NAME_KEY,
             LifeCycleEventsHelper.COLUMN_NAME_VALUE,
-            LifeCycleEventsHelper.COLUMN_NAME_DATE_ADDED
+            LifeCycleEventsHelper.COLUMN_NAME_DATE_ADDED,
+            LifeCycleEventsHelper._ID
     };
 
     // these should be in a super class
-    public static final String _ID = "_ID";
+
     private static final String TEXT_TYPE = " TEXT ";
     private static final String DATE_TYPE = " DATETIME ";
     public static final String DEFAULT_TO_NOW = " DEFAULT CURRENT_TIMESTAMP ";
@@ -51,7 +57,7 @@ public class LifeCycleEventsHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.w(LifeCycleEventsHelper.class.getName(),
                 "upgrading database to version " + newVersion);
-        db.execSQL("DROP TABL IF EXISTS " + TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         db.execSQL(CREATE_TABLE_STRING);
     }
 

@@ -4,12 +4,21 @@ public class LifeCycleEvent {
     private String key;
     private String value;
     private String date_added;
+    private int _ID;
 
-    public String getDate_added() {
+    public Integer getId() {
+        return _ID;
+    }
+
+    public void setId(int id) {
+        this._ID = id;
+    }
+
+    public String getDateAdded() {
         return date_added;
     }
 
-    public void setDate_added(String date_added) {
+    public void setDateAdded(String date_added) {
         this.date_added = date_added;
     }
 
@@ -31,6 +40,6 @@ public class LifeCycleEvent {
 
     @Override
     public String toString() {
-        return getKey() + ": " + getValue();
+        return getKey() + ": " + getValue() + " id: " + getId();
     }
 }

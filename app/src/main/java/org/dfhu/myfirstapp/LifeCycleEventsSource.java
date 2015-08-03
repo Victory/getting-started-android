@@ -54,8 +54,10 @@ public class LifeCycleEventsSource {
 
     public LifeCycleEvent cursorToLifeCycleEvent (Cursor cursor) {
         LifeCycleEvent lifeCycleEvent = new LifeCycleEvent();
-        lifeCycleEvent.setKey(cursor.getString(0));
-        lifeCycleEvent.setValue(cursor.getString(1));
+        lifeCycleEvent.setKey(cursor.getString(LifeCycleEventsHelper.COLUMN_INDEX_KEY));
+        lifeCycleEvent.setValue(cursor.getString(LifeCycleEventsHelper.COLUMN_INDEX_VALUE));
+        lifeCycleEvent.setId(cursor.getInt(LifeCycleEventsHelper.COLUMN_INDEX_ID));
+        lifeCycleEvent.setDateAdded(cursor.getString(LifeCycleEventsHelper.COLUMN_INDEX_DATE_ADDED));
 
         return lifeCycleEvent;
     }

@@ -1,6 +1,8 @@
 package org.dfhu.myfirstapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,11 +10,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 
@@ -36,7 +41,7 @@ public class MyActivity extends AppCompatActivity implements InfoFragment.OnFrag
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my);
+        setContentView(R.layout.relative_activity_my);
 
         // if we have a savedInstanceState we probably already have the fragment, return so
         // we don't have double fragments
@@ -52,13 +57,11 @@ public class MyActivity extends AppCompatActivity implements InfoFragment.OnFrag
             e.printStackTrace();
         }
 
+
         allEvents = lifeCycleEventsSource.getAll();
-        ArrayAdapter<LifeCycleEvent> adapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1, allEvents);
 
+        EventsListAdapter adapter = new EventsListAdapter(this, R.layout.life_cycle_event_item, allEvents);
         getListView().setAdapter(adapter);
-
 
     }
 
@@ -126,18 +129,18 @@ public class MyActivity extends AppCompatActivity implements InfoFragment.OnFrag
     /** called when user clicks insertLifeCycleEvent */
     public synchronized void insertLifeCycleEvent (View view) throws SQLException {
         lifeCycleEventsSource = new LifeCycleEventsSource(this);
-        lifeCycleEventsSource.insertValue("magic", "information");
-        allEvents = lifeCycleEventsSource.getAll();
-        BaseAdapter base = (BaseAdapter) getListView().getAdapter();
-        base.notifyDataSetChanged();
+        LifeCycleEvent event = lifeCycleEventsSource.insertValue("magic", "information");
+        EventsListAdapter adapter = (EventsListAdapter) getListView().getAdapter();
+        adapter.add(event);
+        adapter.notifyDataSetChanged();
     }
 
 
     public void clearList (View view) throws SQLException {
         lifeCycleEventsSource = new LifeCycleEventsSource(this);
         lifeCycleEventsSource.empty();
-        BaseAdapter base = (BaseAdapter) getListView().getAdapter();
-        base.notifyDataSetChanged();
+        EventsListAdapter adapter = (EventsListAdapter) getListView().getAdapter();
+        adapter.clear();
     }
 
 

@@ -53,4 +53,6 @@ public class EventsListAdapter extends ArrayAdapter<LifeCycleEvent> {
 
         return convertView;
     }
+
+
 }

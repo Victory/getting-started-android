@@ -1,16 +1,19 @@
 package org.dfhu.myfirstapp;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.CursorAdapter;
@@ -19,6 +22,7 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.sql.SQLException;
@@ -57,12 +61,34 @@ public class MyActivity extends AppCompatActivity implements InfoFragment.OnFrag
             e.printStackTrace();
         }
 
+        setupListView();
 
+    }
+
+    private void setupListView() {
         allEvents = lifeCycleEventsSource.getAll();
-
         EventsListAdapter adapter = new EventsListAdapter(this, R.layout.life_cycle_event_item, allEvents);
         getListView().setAdapter(adapter);
 
+        getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MyActivity.this);
+
+                dialogBuilder.setTitle("Are you sure?");
+                dialogBuilder.setMessage("The item will be deleted");
+                dialogBuilder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MyActivity.this, "Deleted", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                dialogBuilder.setNegativeButton(android.R.string.cancel, null);
+                dialogBuilder.show();
+
+            }
+        });
     }
 
 

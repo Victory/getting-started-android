@@ -32,17 +32,24 @@
         android:layout_alignParentRight="true" />
 
 
-
-
-
     <Button
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/clear_list"
         android:onClick="clearList"
         android:id="@+id/button_clear_list"
         android:layout_above="@id/lifeCycle"
         />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:onClick="swapOutFragment"
+        android:text="Swap Out Content"
+        android:layout_above="@id/lifeCycle"
+        />
+
 
     <TextView
         android:layout_width="fill_parent"

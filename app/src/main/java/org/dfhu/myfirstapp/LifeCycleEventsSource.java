@@ -10,6 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * XXX: a lot of this should be done async
+ */
 public class LifeCycleEventsSource {
 
     private LifeCycleEventsHelper dbHelper;
@@ -60,6 +63,13 @@ public class LifeCycleEventsSource {
         lifeCycleEvent.setDateAdded(cursor.getString(LifeCycleEventsHelper.COLUMN_INDEX_DATE_ADDED));
 
         return lifeCycleEvent;
+    }
+
+    public void deleteById (Integer id) throws SQLException {
+        open();
+        db.delete(LifeCycleEventsHelper.TABLE_NAME,
+                LifeCycleEventsHelper._ID + " = " + id.toString(),
+                null);
     }
 
     public List<LifeCycleEvent> getAll () {

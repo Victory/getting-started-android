@@ -67,7 +67,7 @@ public class MyActivity extends AppCompatActivity implements InfoFragment.OnFrag
 
     private void setupListView() {
         allEvents = lifeCycleEventsSource.getAll();
-        EventsListAdapter adapter = new EventsListAdapter(this, R.layout.life_cycle_event_item, allEvents);
+        final EventsListAdapter  adapter = new EventsListAdapter(this, R.layout.life_cycle_event_item, allEvents);
         getListView().setAdapter(adapter);
 
         getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -75,11 +75,19 @@ public class MyActivity extends AppCompatActivity implements InfoFragment.OnFrag
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MyActivity.this);
 
+                final int itemId = adapter.getRowId(position);
+
                 dialogBuilder.setTitle("Are you sure?");
                 dialogBuilder.setMessage("The item will be deleted");
                 dialogBuilder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            lifeCycleEventsSource.deleteById(itemId);
+                        } catch (SQLException e) {
+                            Toast.makeText(MyActivity.this, "Could not Delete", Toast.LENGTH_LONG).show();
+                            return;
+                        }
                         Toast.makeText(MyActivity.this, "Deleted", Toast.LENGTH_LONG).show();
                     }
                 });

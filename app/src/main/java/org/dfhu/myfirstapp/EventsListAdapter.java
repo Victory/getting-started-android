@@ -54,5 +54,7 @@ public class EventsListAdapter extends ArrayAdapter<LifeCycleEvent> {
         return convertView;
     }
 
-
+    public int getRowId (int position) {
+        return getItem(position).getId();
+    }
 }

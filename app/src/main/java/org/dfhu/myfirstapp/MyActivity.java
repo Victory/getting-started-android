@@ -1,9 +1,7 @@
 package org.dfhu.myfirstapp;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -12,15 +10,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.CursorAdapter;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,6 +67,7 @@ public class MyActivity extends AppCompatActivity implements InfoFragment.OnFrag
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MyActivity.this);
 
+                final LifeCycleEvent item = adapter.getItem(position);
                 final int itemId = adapter.getRowId(position);
 
                 dialogBuilder.setTitle("Are you sure?");
@@ -88,6 +81,7 @@ public class MyActivity extends AppCompatActivity implements InfoFragment.OnFrag
                             Toast.makeText(MyActivity.this, "Could not Delete", Toast.LENGTH_LONG).show();
                             return;
                         }
+                        adapter.remove(item);
                         Toast.makeText(MyActivity.this, "Deleted", Toast.LENGTH_LONG).show();
                     }
                 });

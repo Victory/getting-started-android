@@ -16,4 +16,5 @@
     <string name="hello_swaped_fragment">Hello Swaped Fragment</string>
     <string name="insert_value">insert value</string>
     <string name="clear_list">clear list</string>
+    <string name="see_on_map">See on Map</string>
 </resources>

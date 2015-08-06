@@ -203,6 +203,12 @@ public class MyActivity extends AppCompatActivity implements InfoFragment.OnFrag
         super.onStop();
     }
 
+    public void openMapIntent (View view) {
+        Uri location = Uri.parse("geo:0,0?q=The+House+of+the+seven+gables");
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
+        startActivity(mapIntent);
+    }
+
     /** return pretty printed now string */
     private String nowString () {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm::ss");

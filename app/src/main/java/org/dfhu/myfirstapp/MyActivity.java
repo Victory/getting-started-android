@@ -1,7 +1,9 @@
 package org.dfhu.myfirstapp;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -206,7 +208,17 @@ public class MyActivity extends AppCompatActivity implements InfoFragment.OnFrag
     public void openMapIntent (View view) {
         Uri location = Uri.parse("geo:0,0?q=The+House+of+the+seven+gables");
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
-        startActivity(mapIntent);
+
+        PackageManager pm = getPackageManager();
+        List<?> options = pm.queryIntentActivities(mapIntent, PackageManager.MATCH_DEFAULT_ONLY);
+
+        if (options.size() > 0) {
+            startActivity(mapIntent);
+        } else {
+            Toast.makeText(
+                    MyActivity.this, "You must have a maps class", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     /** return pretty printed now string */

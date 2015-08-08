@@ -227,6 +227,11 @@ public class MyActivity extends AppCompatActivity implements InfoFragment.OnFrag
         return sdf.format(new Date());
     }
 
+    public void goToDrawerActivity(View view) {
+        Intent intent = new Intent(this, NowWithDrawerActivity.class);
+        startActivity(intent);
+    }
+
 
     @Override
     public void onFragmentInteraction(Uri uri) {

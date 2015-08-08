@@ -17,4 +17,16 @@
     <string name="insert_value">insert value</string>
     <string name="clear_list">clear list</string>
     <string name="see_on_map">See on Map</string>
+    <string name="go_to_drawer_activity">Go To Drawer Activity</string>
+    <string name="title_activity_now_with_drawer">NowWithDrawerActivity</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+    <string name="return_home">Return Home</string>
 </resources>
